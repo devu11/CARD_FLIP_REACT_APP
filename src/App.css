@@ -13,7 +13,7 @@
 .background {
   position: absolute;
   width: 100%;
-  height: 700px;
+  height: 100%;
 }
 
 .background::before {
@@ -25,6 +25,10 @@
   background-size: cover;
   background-position: center;
   animation: zoom 15s infinite;
+}
+.background.paused::before {
+  animation: none;
+  transform: scale(1);
 }
 
 .content {
@@ -72,7 +76,7 @@
 }
 .main-content {
   position: absolute;
-  top: 50%;
+  top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -123,6 +127,7 @@
   border-radius: 50% ;
   margin-right: 10px;
   border: 2px solid black;
+   transition: width 0.3s, height 0.3s;
 
 }
 
@@ -130,7 +135,10 @@
   color: black;
   width: 8px;
 }
-
+.play-button:hover .circle {
+  width: 19px; 
+  height: 19px; 
+}
 .play-button:hover .play-icon {
   animation: rotate .5s linear infinite;
 }
