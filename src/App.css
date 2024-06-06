@@ -134,7 +134,6 @@
 .play-button:hover .play-icon {
   animation: rotate .5s linear infinite;
 }
-
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
