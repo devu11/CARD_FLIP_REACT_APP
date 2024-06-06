@@ -70,3 +70,73 @@
   color: white;
   cursor: pointer;
 }
+.main-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 80%;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 70px;
+ 
+}
+
+.description {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 36px;
+  margin-bottom: 40px;
+  transform: translateY(-35px);
+}
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
+  color: black;
+  background-color: #FDF416;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transform: translateY(-50px);
+  margin-left: 440px;
+  border-radius: 30px;
+  position: relative;
+}
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  background-color: #FDF416;
+  border-radius: 50% ;
+  margin-right: 10px;
+  border: 2px solid black;
+
+}
+
+.play-icon {
+  color: black;
+  width: 8px;
+}
+
+.play-button:hover .play-icon {
+  animation: rotate .5s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
