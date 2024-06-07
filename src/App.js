@@ -34,7 +34,9 @@ function App() {
     <div className="App">
       <div
         className={`background ${
-          isAnimating && !isBackgroundAnimationPaused ? "" : "paused"
+          isAnimating && !isBackgroundAnimationPaused && !showSlider
+            ? ""
+            : "paused"
         }`}
       >
         <div className="content">
