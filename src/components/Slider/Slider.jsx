@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import "./Slider.css";
+import CheckBox from "../CheckBox/CheckBox";
 
-const Slider = ({ onClose }) => {
+const Slider = ({ onClose, onAnimationChange }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 10;
+  const [isAnimating, setIsAnimating] = useState(true);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
+      prevIndex === 0 ? prevIndex : prevIndex - 1
     );
   };
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
+      prevIndex === totalSlides - 1 ? totalSlides : prevIndex + 1
     );
+  };
+
+  const handleCheckBoxDisplay = () => {
+    setIsAnimating(false);
+    onAnimationChange && onAnimationChange(false);
   };
 
   const slidesContent = [
@@ -33,42 +40,60 @@ const Slider = ({ onClose }) => {
 
   return (
     <div className="slider-container">
-      <div className="pagination">
-        <span className="slide-number">
-          {currentIndex + 1} / {totalSlides}
-        </span>
-        <div className="dots">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <span
-              key={index}
-              className={`dot ${currentIndex === index ? "active" : ""}`}
-            ></span>
-          ))}
+      {currentIndex < totalSlides && (
+        <div className="pagination">
+          <span className="slide-number">
+            {currentIndex + 1} / {totalSlides}
+          </span>
+          <div className="dots">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <span
+                key={index}
+                className={`dot ${currentIndex === index ? "active" : ""}`}
+              ></span>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="slider">
-        <button className="slider-nav prev" onClick={handlePrevClick}>
-          <FaLessThan style={{ fontSize: "15px" }} />
-        </button>
-        <div className="slider-content">
-          {slidesContent.map((content, index) => (
-            <div
-              key={index}
-              className={`slider-card ${
-                currentIndex === index ? "active" : ""
-              }`}
-            >
-              <p>{content}</p>
-            </div>
-          ))}
+      )}
+      {currentIndex < totalSlides ? (
+        <div className="slider">
+          <button
+            className="slider-nav prev"
+            onClick={handlePrevClick}
+            disabled={currentIndex === 0}
+          >
+            <FaLessThan style={{ fontSize: "15px" }} />
+          </button>
+          <div className="slider-content">
+            {slidesContent.map((content, index) => (
+              <div
+                key={index}
+                className={`slider-card ${
+                  currentIndex === index ? "active" : ""
+                }`}
+              >
+                <p>{content}</p>
+              </div>
+            ))}
+          </div>
+          <button
+            className="slider-nav next"
+            onClick={handleNextClick}
+            disabled={currentIndex === totalSlides}
+          >
+            <FaGreaterThan style={{ fontSize: "15px" }} />
+          </button>
         </div>
-        <button className="slider-nav next" onClick={handleNextClick}>
-          <FaGreaterThan style={{ fontSize: "15px" }} />
-        </button>
-      </div>
+      ) : (
+        <CheckBox
+          onPlayAgain={() => setCurrentIndex(0)}
+          onAnimationChange={handleCheckBoxDisplay}
+        />
+      )}
       <button className="close-button" onClick={onClose}>
         Close
       </button>
+      {onAnimationChange && onAnimationChange(isAnimating)}
     </div>
   );
 };
