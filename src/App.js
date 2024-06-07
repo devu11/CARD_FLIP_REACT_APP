@@ -5,7 +5,6 @@ import { FaVolumeMute, FaVolumeUp, FaPlay } from "react-icons/fa";
 import Footer from "./components/Footer/Footer";
 import Slider from "./components/Slider/Slider";
 
-
 function App() {
   const [isMuted, setIsMuted] = useState(false);
   const [showSlider, setShowSlider] = useState(false);

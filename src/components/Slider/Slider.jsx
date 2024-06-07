@@ -53,5 +53,4 @@ const Slider = ({ onClose }) => {
     </div>
   );
 };
-
 export default Slider;
