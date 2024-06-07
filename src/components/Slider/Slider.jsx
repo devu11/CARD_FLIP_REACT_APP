@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaLessThan ,FaGreaterThan } from "react-icons/fa";
+import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import "./Slider.css";
 
 const Slider = ({ onClose }) => {
@@ -31,26 +31,22 @@ const Slider = ({ onClose }) => {
     <div className="slider-container">
       <div className="slider">
         <button className="slider-nav prev" onClick={handlePrevClick}>
-        <FaLessThan  style={{ fontSize: "15px" }} />
+          <FaLessThan style={{ fontSize: "15px" }} />
         </button>
         <div className="slider-content">
-          <div className={`slider-card ${currentIndex === 0 ? "active" : ""}`}>{slidesContent[0]}</div>
-          <div className={`slider-card ${currentIndex === 1 ? "active" : ""}`}>{slidesContent[1]}</div>
-          <div className={`slider-card ${currentIndex === 2 ? "active" : ""}`}>{slidesContent[2]}</div>
-          <div className={`slider-card ${currentIndex === 3 ? "active" : ""}`}>{slidesContent[3]}</div>
-          <div className={`slider-card ${currentIndex === 4 ? "active" : ""}`}>{slidesContent[4]}</div>
-          <div className={`slider-card ${currentIndex === 5 ? "active" : ""}`}>{slidesContent[5]}</div>
-          <div className={`slider-card ${currentIndex === 6 ? "active" : ""}`}>{slidesContent[6]}</div>
-          <div className={`slider-card ${currentIndex === 7 ? "active" : ""}`}>{slidesContent[7]}</div>
-          <div className={`slider-card ${currentIndex === 8 ? "active" : ""}`}>{slidesContent[8]}</div>
-          <div className={`slider-card ${currentIndex === 9 ? "active" : ""}`}>{slidesContent[9]}</div>
+          {slidesContent.map((content, index) => (
+            <div key={index} className={`slider-card ${currentIndex === index ? "active" : ""}`}>
+              <p>{content}</p>
+            </div>
+          ))}
         </div>
         <button className="slider-nav next" onClick={handleNextClick}>
-        <FaGreaterThan  style={{ fontSize: "15px" }}/>
+          <FaGreaterThan style={{ fontSize: "15px" }} />
         </button>
       </div>
       <button className="close-button" onClick={onClose}>Close</button>
     </div>
   );
 };
+
 export default Slider;
