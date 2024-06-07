@@ -7,11 +7,15 @@ const Slider = ({ onClose }) => {
   const totalSlides = 10;
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? totalSlides - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
+    );
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === totalSlides - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
+    );
   };
 
   const slidesContent = [
@@ -24,18 +28,36 @@ const Slider = ({ onClose }) => {
     "Dad bought 10 oranges, and mom bought 6. How many oranges are there in total?",
     "A box contained 18 apples. 7 apples fell out. How many apples are left in the box?",
     "Lisa had 12 balloons, and 7 flew away. How many balloons does Lisa have now?",
-    "Michael had $15, and his father gave him $5 more. How much money does Michael have now?"
+    "Michael had $15, and his father gave him $5 more. How much money does Michael have now?",
   ];
 
   return (
     <div className="slider-container">
+      <div className="pagination">
+        <span className="slide-number">
+          {currentIndex + 1} / {totalSlides}
+        </span>
+        <div className="dots">
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <span
+              key={index}
+              className={`dot ${currentIndex === index ? "active" : ""}`}
+            ></span>
+          ))}
+        </div>
+      </div>
       <div className="slider">
         <button className="slider-nav prev" onClick={handlePrevClick}>
           <FaLessThan style={{ fontSize: "15px" }} />
         </button>
         <div className="slider-content">
           {slidesContent.map((content, index) => (
-            <div key={index} className={`slider-card ${currentIndex === index ? "active" : ""}`}>
+            <div
+              key={index}
+              className={`slider-card ${
+                currentIndex === index ? "active" : ""
+              }`}
+            >
               <p>{content}</p>
             </div>
           ))}
@@ -44,9 +66,10 @@ const Slider = ({ onClose }) => {
           <FaGreaterThan style={{ fontSize: "15px" }} />
         </button>
       </div>
-      <button className="close-button" onClick={onClose}>Close</button>
+      <button className="close-button" onClick={onClose}>
+        Close
+      </button>
     </div>
   );
 };
-
 export default Slider;
